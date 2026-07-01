@@ -3,7 +3,7 @@
 
 ---
 
-##Live Demo
+## Live Demo
 
 https://expense-tracker-khaki-nu.vercel.app/
 
