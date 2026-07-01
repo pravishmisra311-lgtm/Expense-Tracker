@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# 💰 Expense Tracker — React.js Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+| Feature | Description |
+|---|---|
+| ➕ Add Expense | Add expenses with title, amount, category, and date |
+| ✏️ Edit Expense | Update any existing expense |
+| 🗑️ Delete Expense | Remove any expense with a confirmation prompt |
+| 📊 Dashboard | See total income, total expenses, and current balance |
+| 📂 Category Summary | View total spending per category with progress bars |
+| 🔍 Search | Search expenses by title |
+| 🔽 Filter | Filter expenses by category |
+| 💾 Local Storage | All data is saved in the browser — persists on refresh |
+| 📱 Responsive | Works on mobile, tablet, and desktop |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **React.js** (Create React App)
+- **HTML5**
+- **CSS3** (Flexbox, CSS Grid, Responsive Design)
+- **JavaScript ES6+**
+- **Browser Local Storage**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📁 Folder Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+expense-tracker/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx          → App title/header
+│   │   ├── Dashboard.jsx       → Income / Expenses / Balance cards
+│   │   ├── ExpenseForm.jsx     → Add & Edit expense form
+│   │   ├── ExpenseList.jsx     → Renders list of ExpenseCards
+│   │   ├── ExpenseCard.jsx     → Single expense card with Edit/Delete
+│   │   ├── SearchBar.jsx       → Search input
+│   │   ├── FilterBar.jsx       → Category filter dropdown
+│   │   └── CategorySummary.jsx → Spending breakdown by category
+│   ├── App.js                  → Root component (state management)
+│   ├── App.css                 → All styles
+│   └── index.js                → Entry point
+├── README.md
+└── package.json
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ Setup Instructions
 
-### `npm run eject`
+### Step 1 — Clone or download the project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# If downloaded as ZIP, extract it
+# Then open a terminal in the project folder
+cd expense-tracker
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Step 2 — Install dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Step 3 — Start the development server
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app will open automatically at **http://localhost:3000**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🧠 React Concepts Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Concept | Where Used |
+|---|---|
+| `useState` | Managing expenses, form fields, search, filter |
+| `useEffect` | Syncing data with localStorage |
+| **Props** | Passing data and handlers between components |
+| **Event Handling** | Form submit, button clicks, input changes |
+| **Conditional Rendering** | Show/hide form, empty messages |
+| `Array.map()` | Rendering expense cards and category lists |
+| `Array.filter()` | Search and category filtering |
+| `Array.reduce()` | Calculating totals and category sums |
+| **Controlled Components** | All form inputs controlled via state |
+| **Component Reusability** | ExpenseCard reused in ExpenseList |
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📝 Interview Talking Points
 
-### Making a Progressive Web App
+### How is data persisted?
+> Local Storage is used via `localStorage.setItem()` inside a `useEffect` hook that runs every time the `expenses` state changes. On app load, the initial state reads from `localStorage.getItem()`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### How does CRUD work?
+> - **Create**: `handleAddExpense` creates a new object with `Date.now()` as ID and spreads it into the expenses array.
+> - **Read**: The `expenses` state array is passed as props to child components.
+> - **Update**: `handleUpdateExpense` maps over the array and replaces the matching expense by ID.
+> - **Delete**: `handleDeleteExpense` filters out the expense with the matching ID.
 
-### Advanced Configuration
+### How does search + filter work?
+> Both `searchTerm` and `selectedCategory` are state variables. The `filteredExpenses` variable is computed by chaining `.filter()` on the expenses array before passing it to `ExpenseList`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### What is prop drilling?
+> State lives in `App.js` and is passed down to child components via props. Handler functions (`onDelete`, `onEdit`) are also passed as props so child components can communicate back up.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📱 Responsive Design
 
-### `npm run build` fails to minify
+- **Desktop**: 3-column dashboard, 2-column content grid
+- **Tablet**: 1-column content grid, 3-column dashboard
+- **Mobile**: Single column layout, stacked cards
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🎨 Color Palette
+
+| Color | Hex | Usage |
+|---|---|---|
+| Primary Blue | `#2563eb` | Header, buttons, badges |
+| Success Green | `#16a34a` | Income amount |
+| Danger Red | `#dc2626` | Expense amounts, delete button |
+| Warning Orange | `#d97706` | Edit button |
+| Light Gray | `#f3f4f6` | Page background |
+| White | `#ffffff` | Cards |
+
+---
